@@ -11,3 +11,8 @@ A random algorithm to find the cloest pair in a set of Image (handwritten digits
     `make helper`<br>
     `./bin/datasetHelper`<br>
     Images will store in `data/images/*.txt`
+
+
+### Reference
+
++ command line arguments parser: [cmdline](https://github.com/tanakh/cmdline)
