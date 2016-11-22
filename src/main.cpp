@@ -18,7 +18,8 @@ cmdline::parser p;
 short s[60020][800] = {0};
 double ans;
 int cpx, cpy;
-vector<double> line, pos;
+vector<double> line;
+vector<pair<double, int>> pos;
 
 void setCmdParser() {
     // -n command
@@ -90,7 +91,7 @@ void findClosestPair(int flag) {
         for (int i = 1; i <= n; i++) {
             double temp = 0;
             for (int j = 1; j <= d; j++) temp = temp + s[i][j] * line[j - 1];
-            pos.push_back(temp);
+            pos.push_back(make_pair(temp, i));
         }
         pair<int, int> p = getClosestPairInLine(n, flag);
         double temp = euclideanDistance(p.first, p.second, d);

@@ -6,16 +6,16 @@
 using namespace std;
 #define INF 1e9
 
-extern vector<double> pos;
+extern vector<pair<double, int>> pos;
 
 double getPivotRandomly(int l, int r) {
     int index = rand() % (r - l) + l;
-    return pos[index];
+    return pos[index].first;
 }
 
 double getPivotMedian(int l, int r) {
     // TODO: get median from l to r
-    return pos[l];
+    return pos[l].first;
 }
 
 pair<double, pair<int, int>> minPair(pair<double, pair<int, int>> x,
@@ -31,22 +31,22 @@ pair<double, pair<int, int>> getClosestPair(
     if (l >= r) return make_pair(INF, make_pair(0, 0));
     if (r - l == 1) return make_pair(INF, make_pair(l, l + 1));
     if (r - l == 2) {
-        if (pos[l] > pos[r]) {
-            double temp = pos[l];
+        if (pos[l].first > pos[r].first) {
+            auto temp = pos[l];
             pos[l] = pos[r];
             pos[r] = temp;
         }
-        return make_pair(abs(pos[l] - pos[r]), make_pair(l, l + 1));
+        return make_pair(abs(pos[l].first - pos[l + 1].first),
+                         make_pair(pos[l].second, pos[l + 1].second));
     }
     double p = getPivot(l, r);
     int i = l;
     int j = r - 1;
-    double temp;
     while (i <= j) {
-        while (pos[i] < p) i++;
-        while (pos[j] > p) j--;
+        while (pos[i].first < p) i++;
+        while (pos[j].first > p) j--;
         if (i <= j) {
-            temp = pos[i];
+            auto temp = pos[i];
             pos[i] = pos[j];
             pos[j] = temp;
             i++;
@@ -57,7 +57,8 @@ pair<double, pair<int, int>> getClosestPair(
     auto right = getClosestPair(i, r, getPivot);
     pair<double, pair<int, int>> mid;
     if (i != l && i != r) {
-        mid = make_pair(abs(pos[i] - pos[i - 1]), make_pair(i - 1, i));
+        mid = make_pair(abs(pos[i].first - pos[i - 1].first),
+                        make_pair(pos[i - 1].second, pos[i].second));
     } else {
         mid = make_pair(INF, make_pair(0, 0));
     }
@@ -68,12 +69,12 @@ std::pair<int, int> getClosestPairInLine(int n, int flag) {
     int x, y;
     if (flag == MEDIAN_FLAG) {
         auto p = getClosestPair(0, n, getPivotMedian);
-        x = p.second.first + 1;
-        y = p.second.second + 1;
+        x = p.second.first;
+        y = p.second.second;
     } else if (flag == PIVOT_FLAG) {
         auto p = getClosestPair(0, n, getPivotRandomly);
-        x = p.second.first + 1;
-        y = p.second.second + 1;
+        x = p.second.first;
+        y = p.second.second;
     }
     return make_pair(x, y);
 }
