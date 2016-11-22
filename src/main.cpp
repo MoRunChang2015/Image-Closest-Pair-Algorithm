@@ -69,6 +69,7 @@ double getStandardNormalDistribution() {
 void findClosestPair(int flag) {
     cpx = 1;
     cpy = 2;
+    // TODO: using two algorithm to find closest pair
 }
 
 int main(int argc, char* argv[]) {

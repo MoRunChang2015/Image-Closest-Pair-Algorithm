@@ -6,6 +6,6 @@
 #define PIVOT_FLAG 1
 
 
-std::pair<int, int> getClosestPairInLine(int flag);
+std::pair<int, int> getClosestPairInLine(std::vector<int> v, int flag);
 
 #endif
