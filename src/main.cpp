@@ -72,7 +72,7 @@ double getStandardNormalDistribution() {
 void getRandomLine(int d) {
     line.clear();
     for (int i = 1; i <= d; i++) {
-        line.push_back(getStandardNormalDistribution());
+        line.push_back(getStandardNormalDistribution() * 1000);
     }
 }
 
