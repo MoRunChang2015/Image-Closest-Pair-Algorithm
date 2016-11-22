@@ -30,4 +30,4 @@
 
 data/images/*
 bin/*
-data/Mnist.ds
+*.ds
