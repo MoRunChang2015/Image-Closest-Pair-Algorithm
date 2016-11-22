@@ -8,9 +8,19 @@ A random algorithm to find the cloest pair in a set of Image (handwritten digits
 
 + Extract all **images** from the dataset
 
-    `make helper`<br>
-    `./bin/datasetHelper`<br>
+    > ```
+    make helper
+./bin/datasetHelper
+    ```
     Images will store in `data/images/*.txt`
+    And **Dataset** is `data/Mnist.ds`
+
++ Run this program
+
+    >```
+    make
+bin/cp -n 60000 -d 784 -f data/Mnist.db
+    ```
 
 
 ### Reference
