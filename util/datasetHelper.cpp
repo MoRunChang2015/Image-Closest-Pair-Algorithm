@@ -7,6 +7,7 @@
 #include <string>
 using namespace std;
 const string DATASET_PATH = "data/train-images.idx3-ubyte";
+const string OUTPUT_FILE = "data/Mnist.ds";
 const string OUTPUT_PATH = "data/images/";
 
 int main() {
@@ -14,7 +15,8 @@ int main() {
     uint8_t pixel;
     int n, width, height;
     ifstream dataset(DATASET_PATH, ios::binary);
-    if (dataset.is_open()) {
+    ofstream Mnist(OUTPUT_FILE);
+    if (dataset.is_open() && Mnist.is_open()) {
         dataset.read((char*)&number, sizeof(uint32_t));
         cout << "Magic number is " << be32toh(number) << " ." << endl; // magic number 2051
 
@@ -38,6 +40,7 @@ int main() {
                 cout << "Can't open output file!" << endl;
                 return 0;
             }
+            Mnist << w;
             for (int i = 1; i <= height; i++) {
                 for (int j = 1; j <= width; j++) {
                     dataset.read((char*)&pixel, sizeof(pixel));
@@ -51,17 +54,21 @@ int main() {
                     if (ans == 1) {
                         cout << "#";
                         output << 1;
+                        Mnist << " " << 1;
                     } else {
                         cout << " ";
                         output << 0;
+                        Mnist << " " << 0;
                     }
                 }
                 cout << endl;
                 output << "\n";
+                Mnist << "\n";
             }
             output.close();
         }
         dataset.close();
+        Mnist.close();
     } else {
         cout << "Dataset doesn't exist!" << endl;
     }
