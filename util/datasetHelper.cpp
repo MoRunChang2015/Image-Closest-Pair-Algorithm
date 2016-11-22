@@ -63,8 +63,8 @@ int main() {
                 }
                 cout << endl;
                 output << "\n";
-                Mnist << "\n";
             }
+            Mnist << "\n";
             output.close();
         }
         dataset.close();
