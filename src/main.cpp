@@ -75,19 +75,30 @@ void getRandomLine(int d) {
     }
 }
 
+double euclideanDistance(int x, int y, int d) {
+    double ans = 0;
+    for (int i = 1; i <= d; i++) {
+        ans = ans + (s[x][i] - s[y][i]) * (s[x][i] - s[y][i]);
+    }
+    return ans;
+}
+
 void findClosestPair(int flag) {
-    cpx = 1;
-    cpy = 2;
     for (int k = 1; k <= TRY_TIME; k++) {
         getRandomLine(d);
         pos.clear();
         for (int i = 1; i <= n; i++) {
             double temp = 0;
-            for (int j = 1; j <= d; j++)
-                temp = temp + s[i][j] * line[j - 1];
+            for (int j = 1; j <= d; j++) temp = temp + s[i][j] * line[j - 1];
             pos.push_back(temp);
         }
-        getClosestPairInLine(flag);
+        pair<int, int> p = getClosestPairInLine(n, flag);
+        double temp = euclideanDistance(p.first, p.second, d);
+        if (temp < ans || ans < 0) {
+            ans = temp;
+            cpx = p.first;
+            cpy = p.second;
+        }
     }
 }
 
@@ -103,7 +114,8 @@ int main(int argc, char* argv[]) {
     readDataset(n, d, path);
 
     srand(time(NULL));
-    findClosestPair(MEDIAN_FLAG);
+    ans = -1;
+    findClosestPair(PIVOT_FLAG);
 
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
          << endl;

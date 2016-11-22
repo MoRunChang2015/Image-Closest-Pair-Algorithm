@@ -1,0 +1,32 @@
+#include "closestPairInLine.hpp"
+#include <iostream>
+#include <cmath>
+using namespace std;
+#define INF -1
+
+int x, y;
+
+extern vector<double> pos;
+
+double getClosestPair(int l, int r, function<double(int, int)>getPivot) {
+    if (r - l == 1)
+        return INF;
+    if (r - l ==2) {
+        x = l;
+        y = l + 1;
+        return abs(pos[l] - pos[r]);
+    }
+    double p = getPivot(l, r);
+}
+
+std::pair<int, int> getClosestPairInLine(int n, int flag) {
+    x = y = 0;
+    if (flag == MEDIAN_FLAG) {
+        getClosestPair(0, n);
+    } else if (flag == PIVOT_FLAG) {
+        getClosestPair(0, n);
+    }
+    x = 1;
+    y = 2;
+    return make_pair(x, y);
+}

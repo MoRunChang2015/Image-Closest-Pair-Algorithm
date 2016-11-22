@@ -52,7 +52,7 @@ int main() {
                         t = t << 1;
                     }
                     if (ans == 1) {
-                        cout << "#";
+                        cout << "*";
                         output << 1;
                         Mnist << " " << 1;
                     } else {
