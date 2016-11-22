@@ -1,14 +1,16 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <ctime>
 #include <cstdlib>
-#include <utility>
+#include <ctime>
+#include <fstream>
+#include <iostream>
 #include <limits>
-#include "cmdline.h"
+#include <string>
+#include <utility>
+#include <vector>
 #include "closestPairInLine.hpp"
+#include "cmdline.h"
 #define WIDTH 28
 #define HEIGHT 28
+#define TRY_TIME 100
 using namespace std;
 int d, n;
 string path;
@@ -16,6 +18,7 @@ cmdline::parser p;
 short s[60020][800] = {0};
 double ans;
 int cpx, cpy;
+vector<double> line, pos;
 
 void setCmdParser() {
     // -n command
@@ -35,8 +38,7 @@ void readDataset(int n, int d, string path) {
     for (int w = 1; w <= n; w++) {
         int i, j;
         input >> i;
-        for (j = 1; j <= d; j++)
-            input >> s[i][j];
+        for (j = 1; j <= d; j++) input >> s[i][j];
     }
 }
 
@@ -53,7 +55,7 @@ void printImage(int x) {
 
 double getStandardNormalDistribution() {
     const double epsilon = numeric_limits<double>::min();
-    const double twoPi = 2.0*3.14159265358979323846;
+    const double twoPi = 2.0 * 3.14159265358979323846;
     double x, y, flag;
     do {
         x = rand() * (1.0 / RAND_MAX);
@@ -66,10 +68,27 @@ double getStandardNormalDistribution() {
         return sqrt(-2.0 * log(x)) * sin(twoPi * y);
 }
 
+void getRandomLine(int d) {
+    line.clear();
+    for (int i = 1; i <= d; i++) {
+        line.push_back(getStandardNormalDistribution());
+    }
+}
+
 void findClosestPair(int flag) {
     cpx = 1;
     cpy = 2;
-    // TODO: using two algorithm to find closest pair
+    for (int k = 1; k <= TRY_TIME; k++) {
+        getRandomLine(d);
+        pos.clear();
+        for (int i = 1; i <= n; i++) {
+            double temp = 0;
+            for (int j = 1; j <= d; j++)
+                temp = temp + s[i][j] * line[j - 1];
+            pos.push_back(temp);
+        }
+        getClosestPairInLine(pos, flag);
+    }
 }
 
 int main(int argc, char* argv[]) {
@@ -86,7 +105,8 @@ int main(int argc, char* argv[]) {
     srand(time(NULL));
     findClosestPair(MEDIAN_FLAG);
 
-    cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy << endl;
+    cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
+         << endl;
     cout << "Image No." << cpx << endl;
     printImage(cpx);
     cout << "Image No." << cpy << endl;
