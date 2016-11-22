@@ -4,16 +4,15 @@ using namespace std;
 
 int x, y;
 
-vector<double> a;
+extern vector<double> pos;
 
 double getClosestPair() {
     // TODO:get closest in line;
 }
 
-std::pair<int, int> getClosestPairInLine(std::vector<double> v, int flag) {
+std::pair<int, int> getClosestPairInLine(int flag) {
     x = y = 0;
-    a = move(v);
-    cout << a.size() << endl;
+    cout << pos.size() << endl;
     if (flag == MEDIAN_FLAG) {
         getClosestPair();
     } else if (flag == PIVOT_FLAG) {

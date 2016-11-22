@@ -87,7 +87,7 @@ void findClosestPair(int flag) {
                 temp = temp + s[i][j] * line[j - 1];
             pos.push_back(temp);
         }
-        getClosestPairInLine(pos, flag);
+        getClosestPairInLine(flag);
     }
 }
 
