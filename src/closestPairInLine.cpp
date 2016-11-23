@@ -13,9 +13,34 @@ double getPivotRandomly(int l, int r) {
     return pos[index].first;
 }
 
+double getMedian(int l, int r, int k) {
+    if (l >= r)
+        return pos[l].first;
+    double mid = pos[(l + r) / 2].first;
+    int i = l, j = r;
+    while (i < j) {
+        while (pos[i].first < mid)
+            i++;
+        while (pos[j].first > mid)
+            j--;
+        if (i <= j) {
+            auto temp = pos[i];
+            pos[i] = pos[j];
+            pos[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    if (i - l >= k && j - l + 1 < k)
+        return mid;
+    else if (j - l + 1 < k)
+        return getMedian(i, r, k - (i - 1));
+    else
+        return getMedian(l, j + 1, k);
+}
+
 double getPivotMedian(int l, int r) {
-    // TODO: get median from l to r
-    return pos[l].first;
+    return getMedian(l, r - 1, (r - l + 1) / 2);
 }
 
 pair<double, pair<int, int>> minPair(pair<double, pair<int, int>> x,

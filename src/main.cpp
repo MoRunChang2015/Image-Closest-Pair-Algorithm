@@ -117,6 +117,7 @@ int main(int argc, char* argv[]) {
     srand(time(NULL));
     ans = -1;
     findClosestPair(PIVOT_FLAG);
+    //findClosestPair(MEDIAN_FLAG);
 
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
          << endl;
