@@ -23,7 +23,7 @@ bin/cp -n <number of images> -d <images' size> -f <path to dataset>
     for eample:
     
     ```
-    bin/cp -n 60000 -d 784 -f data/Mnist.db
+    bin/cp -n 60000 -d 784 -f data/Mnist.ds
     ```
 
 
