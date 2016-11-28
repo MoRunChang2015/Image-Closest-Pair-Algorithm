@@ -63,7 +63,7 @@ double getStandardNormalDistribution() {
         y = rand() * (1.0 / RAND_MAX);
         flag = rand() * (1.0 / RAND_MAX);
     } while (x <= epsilon);
-    if (flag > 0.5)
+    if (flag > 0)
         return sqrt(-2.0 * log(x)) * cos(twoPi * y);
     else
         return sqrt(-2.0 * log(x)) * sin(twoPi * y);
@@ -72,7 +72,7 @@ double getStandardNormalDistribution() {
 void getRandomLine(int d) {
     line.clear();
     for (int i = 1; i <= d; i++) {
-        line.push_back(getStandardNormalDistribution() * 1000);
+        line.push_back(getStandardNormalDistribution());
     }
 }
 
@@ -116,8 +116,8 @@ int main(int argc, char* argv[]) {
 
     srand(time(NULL));
     ans = -1;
-    findClosestPair(PIVOT_FLAG);
-    //findClosestPair(MEDIAN_FLAG);
+    //findClosestPair(PIVOT_FLAG);
+    findClosestPair(MEDIAN_FLAG);
 
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
          << endl;
