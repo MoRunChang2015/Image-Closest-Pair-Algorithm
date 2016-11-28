@@ -14,15 +14,12 @@ double getPivotRandomly(int l, int r) {
 }
 
 double getMedian(int l, int r, int k) {
-    if (l >= r)
-        return pos[l].first;
+    if (l >= r) return pos[l].first;
     double mid = pos[(l + r) / 2].first;
     int i = l, j = r;
     while (i < j) {
-        while (pos[i].first < mid)
-            i++;
-        while (pos[j].first > mid)
-            j--;
+        while (pos[i].first < mid) i++;
+        while (pos[j].first > mid) j--;
         if (i <= j) {
             auto temp = pos[i];
             pos[i] = pos[j];

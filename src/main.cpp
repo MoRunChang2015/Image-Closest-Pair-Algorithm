@@ -113,10 +113,9 @@ int main(int argc, char* argv[]) {
     path = p.get<string>("file");
 
     readDataset(n, d, path);
-
     srand(time(NULL));
     ans = -1;
-    //findClosestPair(PIVOT_FLAG);
+    // findClosestPair(PIVOT_FLAG);
     findClosestPair(MEDIAN_FLAG);
 
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
