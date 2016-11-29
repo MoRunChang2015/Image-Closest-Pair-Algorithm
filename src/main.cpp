@@ -9,14 +9,18 @@
 #include "closestPairInLine.hpp"
 #include "cmdline.h"
 #include "timer.hpp"
-#define WIDTH 28
-#define HEIGHT 28
+
 #define TRY_TIME 100
+
 using namespace std;
+
+int WIDTH = 28;
+int HEIGHT = 28;
+
 int d, n;
 string path;
 cmdline::parser p;
-short s[60020][800] = {0};
+short **s;
 double ans;
 int cpx, cpy;
 vector<double> line;
@@ -106,6 +110,20 @@ void findClosestPair(int flag) {
     }
 }
 
+void createBuffer() {
+    s = new short *[n + 3];
+    for (int i = 0; i < n + 3; i++) {
+        s[i] = new short[d + 3];
+        memset(s[i], 0, d + 3);
+    }
+}
+
+void deleteBuffer() {
+    for (int i = 0; i < n + 3; i++) {
+        delete[] s[i];
+    }
+}
+
 int main(int argc, char* argv[]) {
     setCmdParser();
 
@@ -114,6 +132,10 @@ int main(int argc, char* argv[]) {
     n = p.get<int>("number");
     d = p.get<int>("dimensions");
     path = p.get<string>("file");
+
+    WIDTH = HEIGHT = sqrt(d);
+
+    createBuffer();
 
     readDataset(n, d, path);
     cout << "finish read dataset from file" << endl;
@@ -127,6 +149,7 @@ int main(int argc, char* argv[]) {
     //findClosestPair(MEDIAN_FLAG);
     timer.stopTimer();
 
+
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
          << endl;
     cout << "Image No." << cpx << endl;
@@ -134,5 +157,8 @@ int main(int argc, char* argv[]) {
     cout << "Image No." << cpy << endl;
     printImage(cpy);
     timer.printTime();
+
+    deleteBuffer();
+
     return 0;
 }
