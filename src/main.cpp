@@ -8,6 +8,7 @@
 #include <vector>
 #include "closestPairInLine.hpp"
 #include "cmdline.h"
+#include "timer.hpp"
 #define WIDTH 28
 #define HEIGHT 28
 #define TRY_TIME 100
@@ -86,6 +87,7 @@ double euclideanDistance(int x, int y, int d) {
 
 void findClosestPair(int flag) {
     for (int k = 1; k <= TRY_TIME; k++) {
+        cout << "Trying the " << k << "th times" << endl;
         getRandomLine(d);
         pos.clear();
         for (int i = 1; i <= n; i++) {
@@ -95,6 +97,7 @@ void findClosestPair(int flag) {
         }
         pair<int, int> p = getClosestPairInLine(n, flag);
         double temp = euclideanDistance(p.first, p.second, d);
+        cout << "Get candidate closest pair <" << p.first <<  " , "  << p.second << ">." << endl;
         if (temp < ans || ans < 0) {
             ans = temp;
             cpx = p.first;
@@ -113,10 +116,16 @@ int main(int argc, char* argv[]) {
     path = p.get<string>("file");
 
     readDataset(n, d, path);
+    cout << "finish read dataset from file" << endl;
+
     srand(time(NULL));
     ans = -1;
-    // findClosestPair(PIVOT_FLAG);
-    findClosestPair(MEDIAN_FLAG);
+    // startTimer
+    Timer timer;
+    timer.startTimer();
+    findClosestPair(PIVOT_FLAG);
+    //findClosestPair(MEDIAN_FLAG);
+    timer.stopTimer();
 
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
          << endl;
@@ -124,5 +133,6 @@ int main(int argc, char* argv[]) {
     printImage(cpx);
     cout << "Image No." << cpy << endl;
     printImage(cpy);
+    timer.printTime();
     return 0;
 }
