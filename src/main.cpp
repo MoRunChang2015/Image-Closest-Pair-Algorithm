@@ -101,7 +101,8 @@ void findClosestPair(int flag) {
         }
         pair<int, int> p = getClosestPairInLine(n, flag);
         double temp = euclideanDistance(p.first, p.second, d);
-        cout << "Get candidate closest pair <" << p.first <<  " , "  << p.second << ">." << endl;
+        cout << "Get candidate closest pair <" << p.first << " , " << p.second
+             << ">." << endl;
         if (temp < ans || ans < 0) {
             ans = temp;
             cpx = p.first;
@@ -124,7 +125,7 @@ void deleteBuffer() {
     }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     setCmdParser();
 
     p.parse_check(argc, argv);
@@ -146,9 +147,8 @@ int main(int argc, char* argv[]) {
     Timer timer;
     timer.startTimer();
     findClosestPair(PIVOT_FLAG);
-    //findClosestPair(MEDIAN_FLAG);
+    // findClosestPair(MEDIAN_FLAG);
     timer.stopTimer();
-
 
     cout << "Closest Pair is Image No." << cpx << " and Image No." << cpy
          << endl;
