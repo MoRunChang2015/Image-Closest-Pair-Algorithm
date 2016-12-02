@@ -33,6 +33,8 @@ void setCmdParser() {
     p.add<int>("dimensions", 'd', "the dimensions of images", true, 0);
     // -f command
     p.add<string>("file", 'f', "the path to dataset", true, "");
+    // -m command
+    p.add("median", 'm', "using median as the pivot.");
 }
 
 void readDataset(int n, int d, string path) {
@@ -146,7 +148,15 @@ int main(int argc, char *argv[]) {
     // startTimer
     Timer timer;
     timer.startTimer();
-    findClosestPair(PIVOT_FLAG);
+
+    if (p.exist("median")) {
+        cout << "using median as the pivot." << endl;
+        findClosestPair(MEDIAN_FLAG);
+    }
+    else {
+        cout << "pick a pivot randomly." << endl;
+        findClosestPair(PIVOT_FLAG);
+    }
     // findClosestPair(MEDIAN_FLAG);
     timer.stopTimer();
 
