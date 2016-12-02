@@ -10,7 +10,7 @@
 #include "cmdline.h"
 #include "timer.hpp"
 
-#define TRY_TIME 100
+const int TRY_TIME = 100;
 
 using namespace std;
 

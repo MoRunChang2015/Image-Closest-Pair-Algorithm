@@ -4,7 +4,7 @@
 #include <functional>
 #include <iostream>
 using namespace std;
-#define INF 1e9
+const double INF = 1e9;
 
 extern vector<pair<double, int>> pos;
 
