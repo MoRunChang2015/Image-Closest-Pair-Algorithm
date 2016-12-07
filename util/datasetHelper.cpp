@@ -47,16 +47,16 @@ int main() {
                     uint8_t t = 1;
                     int ans = 0;
                     for (int k = 1; k <= 8; k++) {
-                        if ((pixel & t) == 1) ans = ans + 1;
                         ans = ans << 1;
+                        if ((pixel & t) == t) ans = ans + 1;
                         t = t << 1;
                     }
-                    if (ans == 256) {
-                        cout << "*";
+                    if (ans != 0) {
+                        cout << '*';
                         output << 1;
                         Mnist << " " << 1;
                     } else {
-                        cout << " ";
+                        cout << ' ';
                         output << 0;
                         Mnist << " " << 0;
                     }
