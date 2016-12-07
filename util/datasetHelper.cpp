@@ -48,10 +48,10 @@ int main() {
                     int ans = 0;
                     for (int k = 1; k <= 8; k++) {
                         if ((pixel & t) == 1) ans = ans + 1;
-                        ans == ans << 1;
+                        ans = ans << 1;
                         t = t << 1;
                     }
-                    if (ans == 1) {
+                    if (ans == 256) {
                         cout << "*";
                         output << 1;
                         Mnist << " " << 1;
