@@ -52,13 +52,13 @@ int main() {
                         t = t << 1;
                     }
                     if (ans != 0) {
-                        cout << '*';
-                        output << 1;
-                        Mnist << " " << 1;
+                        cout << "*";
+                        output << '*';
+                        Mnist << " " << ans;
                     } else {
                         cout << ' ';
-                        output << 0;
-                        Mnist << " " << 0;
+                        output << ' ';
+                        Mnist << " " << ans;
                     }
                 }
                 cout << endl;
