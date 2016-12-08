@@ -42,5 +42,9 @@ clean:
 run:
 	./bin/cp -n 60000 -d 784 -f data/Mnist.ds
 
+runMedian:
+	./bin/cp -n 60000 -d 784 -f data/Mnist.ds -m
+
 .PHONY: clean
 .PHONY: run
+.PHONY: runMedian

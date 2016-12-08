@@ -44,6 +44,12 @@ bin/cp -n <number of images> -d <images' size> -f <path to dataset>  [-m]
     make run
     ```
 
+    using Median
+
+    ```
+    make runMedian
+    ```
+
 
 ### Reference
 

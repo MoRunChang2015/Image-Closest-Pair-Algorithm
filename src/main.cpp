@@ -1,3 +1,4 @@
+#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
@@ -50,13 +51,18 @@ void readDataset(int n, int d, string path) {
     }
 }
 
+const string ASSCII_CHAR = " .-+*?X%$#@";
+
+char getCharByGray(int x) {
+    double temp = static_cast<double>(x) / 255.0 *
+                  static_cast<double>(ASSCII_CHAR.length());
+    return ASSCII_CHAR[round(temp)];
+}
+
 void printImage(int x) {
     for (int i = 1; i <= HEIGHT; i++) {
         for (int j = 1; j <= WIDTH; j++)
-            if (s[x][(i - 1) * 28 + j] == 0)
-                cout << '*';
-            else
-                cout << ' ';
+            cout << getCharByGray(s[x][(i - 1) * 28 + j]);
         cout << '\n';
     }
 }
@@ -152,8 +158,7 @@ int main(int argc, char *argv[]) {
     if (p.exist("median")) {
         cout << "using median as the pivot." << endl;
         findClosestPair(MEDIAN_FLAG);
-    }
-    else {
+    } else {
         cout << "pick a pivot randomly." << endl;
         findClosestPair(PIVOT_FLAG);
     }
